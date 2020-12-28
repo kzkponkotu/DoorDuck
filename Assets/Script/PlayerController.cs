@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [System.NonSerialized]
     public bool kuttuki = false,phoenix = false,muscle = false;
     public bool start = false;
-    public Button[] buttons;    
+    public GameObject[] buttons;
 
     void Start()
     {
@@ -50,12 +50,14 @@ public class PlayerController : MonoBehaviour
                 }
                 float angle;
                 if(ispush){
-                    angle = Mathf.LerpAngle(0, -60, 0.5f);
+                    if(muscle)angle = Mathf.LerpAngle(0, -120, 0.5f);
+                    else angle = Mathf.LerpAngle(0, -90, 0.5f);
                     door1.localRotation = Quaternion.Euler(0, angle, 0);
                     door2.localRotation = Quaternion.Euler(0, angle, 0);                
                     gameObject.GetComponent<Rigidbody>().AddForce(transform.up * power);
                 }else{
-                    angle = Mathf.LerpAngle(0, 60, 0.5f);                
+                    if(muscle)angle = Mathf.LerpAngle(0, 120, 0.5f);
+                    else angle = Mathf.LerpAngle(0, 90, 0.5f);
                     door1.localRotation = Quaternion.Euler(0, angle, 0);
                     door2.localRotation = Quaternion.Euler(0, angle, 0);                
                     gameObject.GetComponent<Rigidbody>().AddForce(transform.up * power);
@@ -141,13 +143,22 @@ public class PlayerController : MonoBehaviour
 
     void ItemControl(){
         if(ParameterManager.instance.pointnum >= 1){
-            buttons[0].interactable = true;
+            buttons[0].transform.parent.GetComponent<RawImage>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            buttons[0].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            buttons[0].transform.GetChild(0).GetComponent<Text>().color = new Color(0, 0, 0, 1.0f);
+            buttons[0].GetComponent<Button>().interactable = true;
         }
         if(ParameterManager.instance.pointnum >= 2){
-            buttons[1].interactable = true;
+            buttons[1].transform.parent.GetComponent<RawImage>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            buttons[1].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);            
+            buttons[1].transform.GetChild(0).GetComponent<Text>().color = new Color(0, 0, 0, 1.0f);            
+            buttons[1].GetComponent<Button>().interactable = true;
         }
         if(ParameterManager.instance.pointnum >= 3){
-            buttons[2].interactable = true;
+            buttons[2].transform.parent.GetComponent<RawImage>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            buttons[2].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);            
+            buttons[2].transform.GetChild(0).GetComponent<Text>().color = new Color(0, 0, 0, 1.0f);            
+            buttons[2].GetComponent<Button>().interactable = true;
         }
     }
 
